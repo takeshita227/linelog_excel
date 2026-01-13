@@ -15,3 +15,13 @@ Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean
     End If
 
 End Sub
+
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+    Dim watchRange As Range
+    Set watchRange = Me.Range("AC8:AC73")
+
+    If Target.Cells.Count > 1 Then Exit Sub
+    If Not Application.Intersect(Target, watchRange) Is Nothing Then
+        Tenkey.Show vbModal
+    End If
+End Sub
