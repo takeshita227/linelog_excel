@@ -1,4 +1,4 @@
-Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+PPrivate Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
 
     ' 対象セル：AD4 と AE4
     If Not Intersect(Target, Range("AD4, AE4")) Is Nothing Then
@@ -17,11 +17,21 @@ Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean
 End Sub
 
 Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+
     Dim watchRange As Range
     Set watchRange = Me.Range("AC8:AC73")
 
     If Target.Cells.Count > 1 Then Exit Sub
-    If Not Application.Intersect(Target, watchRange) Is Nothing Then
-        Tenkey.Show vbModal
+
+    ' E4 が選択されたら openingcheck を表示
+    If Not Application.Intersect(Target, Me.Range("E4")) Is Nothing Then
+        openingcheck.Show vbModal
+        Exit Sub
     End If
+
+    ' AC8:AC73 が選択されたら TenKey を表示
+    If Not Application.Intersect(Target, watchRange) Is Nothing Then
+        TenKey.Show vbModal
+    End If
+
 End Sub
