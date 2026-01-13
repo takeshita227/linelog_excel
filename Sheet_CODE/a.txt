@@ -1,0 +1,17 @@
+Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+
+    ' 対象セル：AD4 と AE4
+    If Not Intersect(Target, Range("AD4, AE4")) Is Nothing Then
+        
+        Cancel = True  ' 編集モードを無効化
+
+        ' ◎ が入っていれば消す、空なら ◎ を入れる
+        If Target.Value = "◎" Then
+            Target.ClearContents
+        Else
+            Target.Value = "◎"
+        End If
+
+    End If
+
+End Sub
